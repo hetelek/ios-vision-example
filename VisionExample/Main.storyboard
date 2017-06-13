@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xda-zF-4nu">
+    <device id="ipad10_5" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Vision-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Test" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fX3-Q5-BTv" customClass="VisionView" customModule="Test" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="1112" height="770"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PhE-YL-cAI">
+                                <rect key="frame" x="0.0" y="618" width="1112" height="216"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="wcB-c0-mcV"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="FWA-gU-hs8"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="co3-TF-lZu"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fX3-Q5-BTv" secondAttribute="bottom" id="7ay-zN-Rkn"/>
+                            <constraint firstAttribute="trailing" secondItem="PhE-YL-cAI" secondAttribute="trailing" id="SP3-4b-Ccn"/>
+                            <constraint firstItem="fX3-Q5-BTv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Xp2-XM-2c6"/>
+                            <constraint firstItem="fX3-Q5-BTv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jnj-cZ-80x"/>
+                            <constraint firstAttribute="trailing" secondItem="fX3-Q5-BTv" secondAttribute="trailing" id="kwr-NA-paM"/>
+                            <constraint firstItem="PhE-YL-cAI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="nqd-4M-zbY"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PhE-YL-cAI" secondAttribute="bottom" id="wSb-JT-WaQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Vision" id="USO-Od-JWR">
+                        <barButtonItem key="leftBarButtonItem" title="Change network" id="oyQ-Ot-41d">
+                            <connections>
+                                <action selector="changeNetworkButtonTapped:" destination="BYZ-38-t0r" id="c1g-Ut-hrW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="pickerView" destination="PhE-YL-cAI" id="5N5-2g-GzB"/>
+                        <outlet property="visionView" destination="fX3-Q5-BTv" id="Cid-qz-go5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="475.89928057553959" y="120.86330935251799"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="kcZ-Tj-PcD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xda-zF-4nu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QHr-gX-rut">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="BP2-NY-nhc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aRQ-RB-tLt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-311" y="121"/>
+        </scene>
+    </scenes>
+</document>
