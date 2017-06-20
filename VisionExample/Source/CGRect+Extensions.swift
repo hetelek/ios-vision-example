@@ -11,7 +11,7 @@ import UIKit
 extension CGRect {
     func scaledTo(size: CGSize) -> CGRect {
         let x = self.origin.x * size.width
-        let y = self.origin.y * size.height
+        let y = (1 - self.origin.y - self.size.height) * size.height
         let width = self.size.width * size.width
         let height = self.size.height * size.height
         
