@@ -11,7 +11,7 @@ import AVFoundation
 import Vision
 import CoreGraphics
 
-class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     // MARK: - Properties
     // MARK: Video capture
     private let session = AVCaptureSession()
@@ -24,30 +24,46 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         return videoOutput
     }()
     
-    let modelNames = [
+    // MARK: Model
+    private let modelNames = [
         "Resnet",
         "Inceptionv3"
     ]
-    let models = [
+    private let models = [
         Resnet50().model,
         Inceptionv3().model
     ]
+    public var model: MLModel? {
+        get {
+            return visionView.model
+        }
+        set {
+            visionView.model = newValue
+        }
+    }
     
     // MARK: IBOutlets
     @IBOutlet weak var visionView: VisionView!
-    @IBOutlet weak var pickerView: UIPickerView!
     
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        visionView.model = models.first
         
-        // hide picker view when vision view tapped
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hidePickerView))
-        visionView.addGestureRecognizer(tapGesture)
-        
+        model = models.first
         attemptToStartCamera()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "NetworkSelectingSegue",
+            let destinationController = segue.destination as? NetworkSelectingViewController {
+            destinationController.cameraViewController = self
+            
+            // set list info
+            destinationController.currentSelectedModel = model
+            destinationController.models = models
+            destinationController.modelNames = modelNames
+        }
     }
     
     
@@ -109,53 +125,5 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         if let videoOrientation = DEVICE_TO_VIDEO_ORIENTATION_MAPPING[UIDevice.current.orientation] {
             videoOutput.connections.first?.videoOrientation = videoOrientation
         }
-    }
-    
-    // MARK: - IBActions
-    @IBAction func changeNetworkButtonTapped(_ sender: Any) {
-        // show / hide picker view
-        if pickerView.isHidden {
-            showPickerView()
-        }
-        else {
-            hidePickerView()
-        }
-    }
-    
-    private func showPickerView() {
-        self.pickerView.alpha = 0
-        self.pickerView.isHidden = false
-        
-        UIView.animate(withDuration: 0.2, animations: {
-            self.pickerView.alpha = 1
-        }) { completed in
-            self.pickerView.isHidden = false
-        }
-    }
-    
-    @objc private func hidePickerView() {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.pickerView.alpha = 0
-        }) { completed in
-            self.pickerView.isHidden = true
-        }
-    }
-    
-    
-    // MARK: - UIPickerView delegate/data source
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return models.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return modelNames[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        visionView.model = models[row]
     }
 }

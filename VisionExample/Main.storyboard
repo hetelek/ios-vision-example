@@ -24,44 +24,68 @@
                                 <rect key="frame" x="0.0" y="64" width="1112" height="770"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PhE-YL-cAI">
-                                <rect key="frame" x="0.0" y="618" width="1112" height="216"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="216" id="wcB-c0-mcV"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="FWA-gU-hs8"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="co3-TF-lZu"/>
-                                </connections>
-                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fX3-Q5-BTv" secondAttribute="bottom" id="7ay-zN-Rkn"/>
-                            <constraint firstAttribute="trailing" secondItem="PhE-YL-cAI" secondAttribute="trailing" id="SP3-4b-Ccn"/>
                             <constraint firstItem="fX3-Q5-BTv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Xp2-XM-2c6"/>
                             <constraint firstItem="fX3-Q5-BTv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jnj-cZ-80x"/>
                             <constraint firstAttribute="trailing" secondItem="fX3-Q5-BTv" secondAttribute="trailing" id="kwr-NA-paM"/>
-                            <constraint firstItem="PhE-YL-cAI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="nqd-4M-zbY"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PhE-YL-cAI" secondAttribute="bottom" id="wSb-JT-WaQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Vision" id="USO-Od-JWR">
                         <barButtonItem key="leftBarButtonItem" title="Change network" id="oyQ-Ot-41d">
                             <connections>
-                                <action selector="changeNetworkButtonTapped:" destination="BYZ-38-t0r" id="c1g-Ut-hrW"/>
+                                <segue destination="hvb-ug-Bzv" kind="popoverPresentation" identifier="NetworkSelectingSegue" popoverAnchorBarButtonItem="oyQ-Ot-41d" id="DUR-fr-NEn">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="pickerView" destination="PhE-YL-cAI" id="5N5-2g-GzB"/>
                         <outlet property="visionView" destination="fX3-Q5-BTv" id="Cid-qz-go5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="475.89928057553959" y="120.86330935251799"/>
+        </scene>
+        <!--Network Selecting View Controller-->
+        <scene sceneID="Flf-Vx-ZpL">
+            <objects>
+                <viewController id="hvb-ug-Bzv" customClass="NetworkSelectingViewController" customModule="VisionExample" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="g01-sK-agI"/>
+                        <viewControllerLayoutGuide type="bottom" id="5bq-XL-1CQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ccl-XI-s2g">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TNg-ry-uOa">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="hvb-ug-Bzv" id="HDd-Wd-bJe"/>
+                                    <outlet property="delegate" destination="hvb-ug-Bzv" id="jlC-9w-vvS"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TNg-ry-uOa" firstAttribute="top" secondItem="g01-sK-agI" secondAttribute="bottom" id="539-EI-s44"/>
+                            <constraint firstItem="5bq-XL-1CQ" firstAttribute="top" secondItem="TNg-ry-uOa" secondAttribute="bottom" id="HLG-Y1-mBV"/>
+                            <constraint firstItem="TNg-ry-uOa" firstAttribute="leading" secondItem="ccl-XI-s2g" secondAttribute="leading" id="Rck-1v-ibx"/>
+                            <constraint firstAttribute="trailing" secondItem="TNg-ry-uOa" secondAttribute="trailing" id="hLH-V4-tJl"/>
+                        </constraints>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="375" height="250"/>
+                    <connections>
+                        <outlet property="pickerView" destination="TNg-ry-uOa" id="cA6-KU-hpR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PQ7-mR-lUx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1140.6474820143885" y="120.86330935251799"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kcZ-Tj-PcD">
